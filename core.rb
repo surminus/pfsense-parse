@@ -1,6 +1,9 @@
-require 'rexml/document'
-include REXML
+require 'nokogiri'
+require_relative("process.rb")
 
-xmlfile = File.new("pfsense.xml")
-$xmldoc = Document.new(xmlfile)
+$file = ARGV[0]
+
+if ARGV.empty?
+    abort("No file selected")
+end
 
