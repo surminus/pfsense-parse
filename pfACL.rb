@@ -1,44 +1,49 @@
 #!/usr/bin/ruby 
 
-require_relative("core.rb")
 require 'nokogiri'
 
 file = ARGV[0]
 
 if ARGV.empty?
-    abort("No file selected")
+  abort("No file selected")
 end
+  
+# Array for name
+a = ["Description ",
+     "Type        ",
+     "Interface   ",
+     "Source      ",
+     "Destination ",
+     "Protocol    ",
+     "Port        "
+    ]
+  
+# Array for searchterm
+b = ["./descr",
+     "./type",
+     "./interface",
+     "./source/address",
+     "./destination/address",
+     "./protocol",
+     "./destination/port"
+    ]
+  
+# Combine arrays
+c = a.zip(b)
 
 xmlfeed = Nokogiri::XML(open(file))
 xmlfeed.xpath("./pfsense/filter/rule").each do |item|    
   
-  print "Description:   #{item.xpath("./descr").text}\n"
-  print "Type:          #{item.xpath("./type").text}\n"
-  print "Interface:     #{item.xpath("./interface").text}\n"
+  c.each do |name, searchterm| 
 
-  if not item.xpath("./source/address").empty?
-    print "Source:        #{item.xpath("./source/address").text}\n"
-  else
-    print "Source:        *\n"
+    if not item.xpath(searchterm).empty?
+      print "#{name}:   "          
+      print "#{item.xpath(searchterm).text}\n"
+    else
+      print "#{name}:   "          
+      print "*\n"
+    end
+  
   end
-
-  if not item.xpath("./destination/address").empty?
-    print "Destination:   #{item.xpath("./destination/address").text}\n"
-  else
-    print "Destination:   *\n"
-  end
-
-  if not item.xpath("./protocol").empty?
-    print "Protocol:      #{item.xpath("./protocol").text}\n"
-  else
-    print "Protocol:      *\n"
-  end
-
-  if not item.xpath("./protocol").text == "icmp"
-    print "Port:          #{item.xpath("./destination/port").text}\n\n"
-  else
-    print "Port:          -\n\n"
-  end
-
+  print "\n"
 end
-
