@@ -4,17 +4,38 @@
 
 Some code to help dissect and view in plain language pfsense config.xml files
 
-Pre-req
--------
-gem install nokogiri 
+Gem requirements
+----------------
+
+* nokogiri 
 
 Usage
 -----
-ruby core.rb <option> <file>
+ruby core.rb option output file
 
-Options
--------
-acl
-interface
-alias
-nat
+| Option    | Function
+| --------- | ---------
+| acl       | Access Control Lists
+| interface | Assigned network interfaces
+| alias     | IP and port aliases
+| nat       | Network Address Translations
+
+| Output    | Function
+| --------- | ---------
+| list      | Long human-readable list
+| psv       | Pipe Separated Values
+
+Notes
+-----
+
+For Ruby versions <1.9 "require_relative" isn't present. Update the code with: 
+
+```bash 
+sed -i 's/require_relative/require/g' *
+```
+
+Then add to the beginning of core.rb:
+
+```Ruby
+$LOAD_PATH.unshift(File.dirname(__FILE__))
+```
