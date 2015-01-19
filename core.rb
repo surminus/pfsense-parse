@@ -4,10 +4,11 @@ require 'nokogiri'
 require_relative("process")
 
 $option = ARGV[0]
-$file = ARGV[1]
+$output = ARGV[1]
+$file = ARGV[2]
 
 if ARGV.empty?
-  abort("Error: Check README")
+  abort("Usage:\nruby core.rb <option> <output> <file>\n\nOutputs:\n  list\n  psv\n\nOptions:\n  acl\n  nat\n  interface\n  alias")
 end
 
 case $option
