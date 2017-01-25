@@ -13,12 +13,14 @@ Usage
 -----
 ruby core.rb option output file
 
-| Option    | Function
-| --------- | ---------
-| acl       | Access Control Lists
-| interface | Assigned network interfaces
-| alias     | IP and port aliases
-| nat       | Network Address Translations
+| Option      | Function
+| ---------   | ---------
+| acl         | Access Control Lists
+| interface   | Assigned network interfaces
+| alias       | IP and port aliases
+| nat         | Network Address Translations
+| portforward | Inbound Port Forwarding rules
+| users       | Local system users
 
 | Output    | Function
 | --------- | ---------

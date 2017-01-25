@@ -20,6 +20,10 @@ when "interface"
   require_relative("interface")
 when "alias"
   require_relative("alias")
+when "portforward"
+  require_relative("portforward")
+when "users"
+  require_relative("users")
 else
   abort("Unrecognised option")
 end
